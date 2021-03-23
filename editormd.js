@@ -2010,7 +2010,7 @@
                 pedantic    : false,
                 sanitize    : (settings.htmlDecode) ? false : true,  // 关闭忽略HTML标签，即开启识别HTML标签，默认为false
                 smartLists  : true,
-                smartypants : true
+                smartypants : false
             };
             
             marked.setOptions(markedOptions);
@@ -3954,7 +3954,7 @@
             pedantic    : false,
             sanitize    : (settings.htmlDecode) ? false : true, // 是否忽略HTML标签，即是否开启HTML标签解析，为了安全性，默认不开启
             smartLists  : true,
-            smartypants : true
+            smartypants : false
         };
         
 		markdownDoc = new String(markdownDoc);
@@ -3963,6 +3963,8 @@
         
         markdownParsed = editormd.filterHTMLTags(markdownParsed, settings.htmlDecode);
         
+        markdownParsed = DOMPurify.sanitize(markdownParsed);
+
         if (settings.markdownSourceCode) {
             saveTo.text(markdownDoc);
         } else {
@@ -4146,7 +4148,7 @@
         script.id     = fileName.replace(/[\./]+/g, "-");
         script.type   = "text/javascript";        
         script.src    = fileName + ".js";
-        
+
         if (editormd.isIE8) 
         {            
             script.onreadystatechange = function() {
@@ -4168,8 +4170,9 @@
                 callback();
             };
         }
-
+ 
         if (into === "head") {
+            // console.log(script);
             document.getElementsByTagName("head")[0].appendChild(script);
         } else {
             document.body.appendChild(script);
