@@ -2015,11 +2015,11 @@
             
             marked.setOptions(markedOptions);
                     
-            var newMarkdownDoc = editormd.$marked(cmValue, markedOptions);
+            var newMarkdownDoc = DOMPurify.sanitize(editormd.$marked(cmValue, markedOptions));
             
-            //console.info("cmValue", cmValue, newMarkdownDoc);
+            // console.info("cmValue", cmValue, newMarkdownDoc);
             
-            newMarkdownDoc = editormd.filterHTMLTags(newMarkdownDoc, settings.htmlDecode);
+            // newMarkdownDoc = editormd.filterHTMLTags(newMarkdownDoc, settings.htmlDecode);
             
             //console.error("cmValue", cmValue, newMarkdownDoc);
             
