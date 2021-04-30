@@ -69,6 +69,8 @@ bower install editor.md
     <textarea style="display:none;">### Hello Editor.md !</textarea>
 </div>
 <script src="jquery.min.js"></script>
+<script src="highlight.min.js"></script>
+<script src="purify.min.js"></script>
 <script src="editor.md/editormd.min.js"></script>
 <script type="text/javascript">
     $(function() {
@@ -96,6 +98,8 @@ If you using modular script loader:
     <textarea style="display:none;">### Hello world!</textarea>             
 </div>
 <script src="jquery.min.js"></script>
+<script src="highlight.min.js"></script>
+<script src="purify.min.js"></script>
 <script src="editormd/editormd.js"></script>
 <script src="editormd/lib/marked.min.js"></script>
 <script src="editormd/lib/prettify.min.js"></script>
