@@ -1999,7 +1999,7 @@
                 emailLink            : settings.emailLink,        // for mail address auto link
                 flowChart            : settings.flowChart,
                 sequenceDiagram      : settings.sequenceDiagram,
-                previewCodeHighlight : false // settings.previewCodeHighlight,
+                previewCodeHighlight : settings.previewCodeHighlight,
             };
             
             var markedOptions = this.markedOptions = {
@@ -2011,10 +2011,10 @@
                 sanitize    : (settings.htmlDecode) ? false : true,  // 关闭忽略HTML标签，即开启识别HTML标签，默认为false
                 smartLists  : true,
                 smartypants : false,
-                highlight: function(code, lang) {
-                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-                    return hljs.highlight(code, { language }).value;
-                },
+                // highlight: function(code, lang) {
+                //     const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                //     return hljs.highlight(code, { language }).value;
+                // },
             };
             
             marked.setOptions(markedOptions);
@@ -3941,22 +3941,23 @@
             emailLink            : settings.emailLink,        // for mail address auto link
             flowChart            : settings.flowChart,
             sequenceDiagram      : settings.sequenceDiagram,
-            previewCodeHighlight : false, // settings.previewCodeHighlight,
+            previewCodeHighlight : settings.previewCodeHighlight,
         };
-
+        
         var markedOptions = {
             renderer    : editormd.markedRenderer(markdownToC, rendererOptions),
             gfm         : settings.gfm,
             tables      : true,
             breaks      : true,
             pedantic    : false,
-            //sanitize    : (settings.htmlDecode) ? false : true, // 是否忽略HTML标签，即是否开启HTML标签解析，为了安全性，默认不开启
+            // sanitize    : (settings.htmlDecode) ? false : true, // 是否忽略HTML标签，即是否开启HTML标签解析，为了安全性，默认不开启
             smartLists  : true,
             smartypants : false,
-            highlight: function(code, lang) {
-                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-                return hljs.highlight(code, { language }).value;
-            },
+            // highlight: function(code, lang) {
+            //     // const hljs = require('highlight.js');
+            //     const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+            //     return hljs.highlight(code, { language }).value;
+            // },
         };
         
         // markdownDoc = new String(markdownDoc);
