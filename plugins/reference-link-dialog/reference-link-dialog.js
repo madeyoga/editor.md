@@ -41,7 +41,7 @@
                                         "<input type=\"text\" data-url-id />" +
                                         "<br/>" +
                                         "<label>" + dialogLang.url + "</label>" +
-                                        "<input type=\"text\" value=\"http://\" data-url />" + 
+                                        "<input type=\"text\" value=\"https://\" data-url />" + 
                                         "<br/>" +
                                         "<label>" + dialogLang.urlTitle + "</label>" +
                                         "<input type=\"text\" value=\"" + selection + "\" data-title />" +
