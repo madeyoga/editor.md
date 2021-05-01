@@ -4150,7 +4150,7 @@
         script        = document.createElement("script");
         script.id     = fileName.replace(/[\./]+/g, "-");
         script.type   = "text/javascript";        
-        script.src    = fileName + ".js";
+        script.src    = fileName + ".js?";
 
         if (editormd.isIE8) 
         {            
