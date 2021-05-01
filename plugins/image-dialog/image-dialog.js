@@ -154,32 +154,42 @@
                     loading(true);
 
                     var submitHandler = function() {
+                        var fileInput  = dialog.find("[name=\"" + classPrefix + "image-file\"]");
 
-                        var uploadIframe = document.getElementById(iframeName);
+                        var data = new FormData();
 
-                        uploadIframe.onload = function() {
+                        var csrfMiddlewareTokenField = document.getElementsByName("csrfmiddlewaretoken")[0];
 
-                            loading(false);
-
-                            var body = (uploadIframe.contentWindow ? uploadIframe.contentWindow : uploadIframe.contentDocument).document.body;
-                            var json = (body.innerText) ? body.innerText : ( (body.textContent) ? body.textContent : null);
-
-                            json = (typeof JSON.parse !== "undefined") ? JSON.parse(json) : eval("(" + json + ")");
-
+                        data.append('image', fileInput[0].files[0]);
+                        data.append('csrfmiddlewaretoken', csrfMiddlewareTokenField.value);
+                        
+                        fetch(action, {
+                            method: 'POST',
+                            credentials: 'same-origin',
+                            body: data
+                        })
+                        .then(response => response.json())
+                        .then((json) => {
+                            console.log('Success:', json);
                             if(!settings.crossDomainUpload)
                             {
-                              if (json.success === 1)
-                              {
-                                  dialog.find("[data-url]").val(json.url);
-                              }
-                              else
-                              {
-                                  alert(json.message);
-                              }
+                                if (json.success === 1)
+                                {
+                                    dialog.find("[data-url]").val(json.url);
+                                }
+                                else
+                                {
+                                    alert(json.message);
+                                }
                             }
-
                             return false;
-                        };
+                        })
+                        .catch(
+                            error => alert(error) // Handle the error response object
+                        )
+                        .finally(() =>{
+                            loading(false);
+                        });
                     };
 
                     dialog.find("[type=\"submit\"]").bind("click", submitHandler).trigger("click");
@@ -189,14 +199,13 @@
 			dialog = editor.find("." + dialogName);
 			dialog.find("[type=\"text\"]").val("");
 			dialog.find("[type=\"file\"]").val("");
-			dialog.find("[data-link]").val("http://");
+			dialog.find("[data-link]").val("https://");
 
 			this.dialogShowMask(dialog);
 			this.dialogLockScreen();
 			dialog.show();
 
 		};
-
 	};
 
 	// CommonJS/Node.js
