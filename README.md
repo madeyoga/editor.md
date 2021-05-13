@@ -5,7 +5,8 @@
 ![](https://img.shields.io/github/stars/pandao/editor.md.svg)
 ![](https://img.shields.io/github/forks/pandao/editor.md.svg)
 ![](https://img.shields.io/github/tag/pandao/editor.md.svg)
-![](https://img.shields.io/github/release/pandao/editor.md.svg)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/madeyoga/editor.md)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/madeyoga/editor.md?include_prereleases)
 ![](https://img.shields.io/github/issues/pandao/editor.md.svg)
 ![](https://img.shields.io/bower/v/editor.md.svg)
 
