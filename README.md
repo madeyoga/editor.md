@@ -63,6 +63,8 @@ bower install editor.md
 ##### Create a Markdown editor
 
 ```html
+<!-- Highlight.js themes: https://highlightjs.org/static/demo/ -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/vs.min.css" />
 <link rel="stylesheet" href="editor.md/css/editormd.min.css" />
 <div id="editor">
     <!-- Tips: Editor.md can auto append a `<textarea>` tag -->
@@ -70,6 +72,7 @@ bower install editor.md
 </div>
 <script src="jquery.min.js"></script>
 <script src="purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
 <script src="editor.md/editormd.min.js"></script>
 <script type="text/javascript">
     $(function() {
@@ -91,6 +94,8 @@ If you using modular script loader:
 ##### Markdown to HTML
 
 ```html
+<!-- Highlight.js themes: https://highlightjs.org/static/demo/ -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/vs.min.css" />
 <link rel="stylesheet" href="editormd/css/editormd.preview.css" />
 <div id="test-markdown-view">
     <!-- Server-side output Markdown text -->
@@ -98,9 +103,9 @@ If you using modular script loader:
 </div>
 <script src="jquery.min.js"></script>
 <script src="purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
 <script src="editormd/editormd.js"></script>
 <script src="editormd/lib/marked.min.js"></script>
-<script src="editormd/lib/prettify.min.js"></script>
 <script type="text/javascript">
     $(function() {
 	    var testView = editormd.markdownToHTML("test-markdown-view", {
@@ -253,7 +258,7 @@ Editor.md options and default values:
 - [FontAwesome](http://fontawesome.io/ "FontAwesome")
 - [github-markdown.css](https://github.com/sindresorhus/github-markdown-css "github-markdown.css")
 - [KaTeX](http://khan.github.io/KaTeX/ "KaTeX")
-- [prettify.js](http://code.google.com/p/google-code-prettify/ "prettify.js")
+- [highlight.js](https://github.com/highlightjs/highlight.js "highlight.js")
 - [Rephael.js](http://raphaeljs.com/ "Rephael.js")
 - [flowchart.js](http://adrai.github.io/flowchart.js/ "flowchart.js")
 - [sequence-diagram.js](http://bramp.github.io/js-sequence-diagrams/ "sequence-diagram.js")
