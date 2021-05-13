@@ -416,7 +416,7 @@
             
             var appendElements = [
                 (!settings.readOnly) ? "<a href=\"javascript:;\" class=\"fa fa-close " + classPrefix + "preview-close-btn\"></a>" : "",
-                ( (settings.saveHTMLToTextarea) ? "<textarea class=\"" + classNames.textarea.html + "\" name=\"" + id + "-html-code\"></textarea>" : "" ),
+                ( (settings.saveHTMLToTextarea) ? "<textarea class=\"" + classNames.textarea.html + "\" name=\"" + id + "_html_code\"></textarea>" : "" ),
                 "<div class=\"" + classPrefix + "preview\"><div class=\"markdown-body " + classPrefix + "preview-container\"></div></div>",
                 "<div class=\"" + classPrefix + "container-mask\" style=\"display:block;\"></div>",
                 "<div class=\"" + classPrefix + "mask\"></div>"
@@ -581,7 +581,7 @@
 
                             editormd.$marked = marked;
                                 
-                            if (settings.previewCodeHighlight) 
+                            if (settings.previewCodeHighlight)
                             {
                                 editormd.loadScript(loadPath + "prettify.min", function() {
                                     loadFlowChartOrSequenceDiagram();
@@ -1473,11 +1473,13 @@
             
             if (settings.previewCodeHighlight) 
             {
-                previewContainer.find("pre").addClass("prettyprint linenums");
-                
-                if (typeof prettyPrint !== "undefined")
-                {                    
-                    prettyPrint();
+                if (typeof hljs !== "undefined")
+                {
+                    // hljs.highlightAll();
+                }
+                else
+                {
+                    alert("Undefined hljs");
                 }
             }
 
@@ -2011,10 +2013,10 @@
                 sanitize    : (settings.htmlDecode) ? false : true,  // 关闭忽略HTML标签，即开启识别HTML标签，默认为false
                 smartLists  : true,
                 smartypants : false,
-                // highlight: function(code, lang) {
-                //     const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-                //     return hljs.highlight(code, { language }).value;
-                // },
+                highlight: (settings.previewCodeHighlight) ? function(code, lang) {
+                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                    return hljs.highlight(code, { language }).value;
+                } : false
             };
             
             marked.setOptions(markedOptions);
@@ -3190,7 +3192,6 @@
         "Ctrl-6"       : "h6",
         "Ctrl-B"       : "bold",  // if this is string ==  editormd.toolbarHandlers.xxxx
         "Ctrl-D"       : "datetime",
-        
         "Ctrl-E"       : function() { // emoji
             var cm        = this.cm;
             var cursor    = cm.getCursor();
@@ -3953,11 +3954,11 @@
             // sanitize    : (settings.htmlDecode) ? false : true, // 是否忽略HTML标签，即是否开启HTML标签解析，为了安全性，默认不开启
             smartLists  : true,
             smartypants : false,
-            // highlight: function(code, lang) {
-            //     // const hljs = require('highlight.js');
-            //     const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-            //     return hljs.highlight(code, { language }).value;
-            // },
+            highlight: (settings.previewCodeHighlight) ? function(code, lang) {
+                // const hljs = require('highlight.js');
+                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                return hljs.highlight(code, { language }).value;
+            } : false,
         };
         
         // markdownDoc = new String(markdownDoc);
@@ -3997,13 +3998,7 @@
                 div.find(".editormd-toc-menu, .editormd-markdown-toc").remove();
             }
         }
-            
-        if (settings.previewCodeHighlight) 
-        {
-            div.find("pre").addClass("prettyprint linenums");
-            prettyPrint();
-        }
-        
+
         if (!editormd.isIE8) 
         {
             if (settings.flowChart) {
