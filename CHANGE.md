@@ -532,3 +532,17 @@ v1.2.0 主要更新：
 - 改进：根据指针在当前行的位置更合理插入标题和水平线 [#104](https://github.com/pandao/editor.md/pull/104)；
 - 改进：调整了字体，优先显示 `"YaHei Consolas Hybrid", Consolas`；
 - 改进：修复在 Bootstrap 下的兼容性问题，即因为 box-sizing 写错位置导致的弹出层宽度等错位问题 [#107](https://github.com/pandao/editor.md/issues/107)；
+
+### v2.0.0
+
+#### v2.0-beta.0
+Breaking Changes:
+- Change prettify to Highlight.js 10.7.2
+- Change default id for HTML code text area. Now use underscore instead of a hyphen (Django app compatibility)
+- Update markedjs to 2.0.3
+- Update upload image plugin, Search for csrfmiddlewaretoken value & Change method to post, using fetch API.
+
+Other:
+- Use DOMPurify to prevent XSS, to editor preview & markdownToHTML()
+- Update markdown-body's webkit-scrollbar style
+- Update some plugins default URL to use HTTPS
