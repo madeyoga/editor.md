@@ -4059,6 +4059,8 @@
             tocDropdown          : false,
             tocContainer         : ""
         };
+        
+        editormd.$marked  = marked;
 
         var div           = $();
         var settings      = div.settings = $.extend(true, defaults, options || {});
