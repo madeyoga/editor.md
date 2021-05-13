@@ -3998,7 +3998,7 @@
                 div.find(".editormd-toc-menu, .editormd-markdown-toc").remove();
             }
         }
-
+        
         if (!editormd.isIE8) 
         {
             if (settings.flowChart) {
@@ -4040,6 +4040,70 @@
         
         return div;
     };
+
+
+    /**
+     * 
+     * Parse Markdown & Render TOC
+     * 
+     * @param   {Object}   [options={}]  配置选项，可选
+     * @returns {Object}   null           返回jQuery对象元素
+     */
+    
+    editormd.renderTOC = function(options) {
+        var defaults = {
+            toc                  : true,
+            tocm                 : false,
+            tocStartLevel        : 1,
+            tocTitle             : "目录",
+            tocDropdown          : false,
+            tocContainer         : ""
+        };
+
+        var div           = $();
+        var settings      = div.settings = $.extend(true, defaults, options || {});
+        
+        var markdownDoc   = settings.markdown; 
+        var markdownToC   = [];
+
+        var rendererOptions = {  
+            toc                  : settings.toc,
+            tocm                 : settings.tocm,
+            tocStartLevel        : settings.tocStartLevel,
+        };
+        
+        var markedOptions = {
+            renderer    : editormd.markedRenderer(markdownToC, rendererOptions),
+            gfm         : settings.gfm,
+            tables      : true,
+            breaks      : true,
+            pedantic    : false,
+            smartLists  : true,
+            smartypants : false,
+        };
+
+        marked(markdownDoc, markedOptions);
+
+        var tocContainer = (settings.tocContainer !== "") ? $(settings.tocContainer) : div;
+        
+        if (settings.tocContainer !== "")
+        {
+            tocContainer.attr("previewContainer", false);
+        }
+        
+        div.tocContainer = this.markdownToCRenderer(markdownToC, tocContainer, settings.tocDropdown, settings.tocStartLevel);
+        
+        if (settings.tocDropdown || div.find("." + this.classPrefix + "toc-menu").length > 0)
+        {
+            this.tocDropdownMenu(div, settings.tocTitle);
+        }
+        
+        if (settings.tocContainer !== "")
+        {
+            div.find(".editormd-toc-menu, .editormd-markdown-toc").remove();
+        }
+    };
+
     
     // Editor.md themes, change toolbar themes etc.
     // added @1.5.0
